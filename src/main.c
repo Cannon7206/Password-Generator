@@ -3,20 +3,34 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+/*
+ *  This a delay function
+ *  It is kinda cpu expensive
+ */
+
+void delay(int ms) {
+    clock_t start = clock();
+    clock_t target = start + (ms * CLOCKS_PER_SEC / 1000);
+    while (clock() > target) {
+    }
+}
+//  Initialize Random function
 void initRandom() { srand(time(NULL)); }
+//  Random Integer function with bounds
 int randomInt(int min, int max) { return (rand() % (max - min + 1)) + min; }
 
 char randomChar() {
-    int min = 1;
-    int max = 3;
+    const int min = 1;
+    const int max = 3;
     int typeChoice = randomInt(min, max);
     char value = '\0';
-    int minCaptial = 65;
-    int maxCaptial = 90;
-    int minLower = 97;
-    int maxLower = 122;
-    int minNum = 48;
-    int maxNum = 57;
+    const int minCaptial = 65;
+    const int maxCaptial = 90;
+    const int minLower = 97;
+    const int maxLower = 122;
+    const int minNum = 48;
+    const int maxNum = 57;
 
     switch (typeChoice) {
         case 1:
@@ -66,6 +80,7 @@ int main() {
                 randomPass(length, password);
                 printf("Your Password is: %s \n", password);
                 free(password);
+                delay(200);
                 break;
             }
             case 'q':
